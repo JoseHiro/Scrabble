@@ -1,0 +1,30 @@
+.tile-field {
+
+}
+
+.tile-field td{
+	background: #ffecb3;
+  border: 1px solid #999;
+	width: 3em;
+	height: 3em;
+	text-align: center;
+  font-weight: bold;
+}
+
+.tile-field td:hover {
+  background: #66c !important;
+	cursor: pointer
+}
+
+.table1 td:hover {
+	background: #66c !important;
+	cursor: pointer
+}
+
+.selected {
+  border: solid 3px pink !important;
+}
+
+.empty {
+  border: 1px solid #999 !important;
+}

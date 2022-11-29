@@ -1,0 +1,33 @@
+.game-table {
+	border-collapse: collapse;
+	border: 2px solid #999;
+}
+
+.game-table td {
+	border: 1px solid #999;
+	background: #e9e3dd;
+	width: 3em;
+	height: 3em;
+	text-align: center;
+  font-weight: bold;
+}
+
+.triple-word {
+  background-color: red !important;
+}
+
+.double-word {
+  background-color: pink !important;
+}
+
+.double-letter {
+  background-color: #99ebff !important;
+}
+
+.triple-letter {
+  background-color: #00b3b3 !important;
+}
+
+.current-word {
+  border: solid 2px red !important;
+}
