@@ -28,3 +28,17 @@
 .empty {
   border: 1px solid #999 !important;
 }
+
+
+
+.fixed1 {
+  position: fixed;
+  bottom: 20px;
+  left: 5px;
+}
+
+.fixed2 {
+  position: fixed;
+  bottom: 20px;
+  right: 5px;
+}

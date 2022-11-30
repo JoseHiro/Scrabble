@@ -3,14 +3,14 @@ import { add } from "@hotwired/stimulus";
 import "@hotwired/turbo-rails"
 import "./controllers"
 import { checkScore } from "./controllers/calculation";
-import { changeTurn } from "./controllers/changePlayer";
+import { changeTurn, shuffle, passTurn } from "./controllers/changePlayer";
 const dragEvents = require("./controllers/dragAction");
 
 // window.addEventListener('load', function(){
 
 // alphabets, amount and score
 
-let alphabets = {
+export let alphabets = {
   "A" : [9, 1], "B" : [2, 3], "C" : [1, 3], "D" : [4, 1], "E" : [12, 1],
   "F" : [2, 4], "G" : [3, 1], "H" : [2, 4], "I" : [9, 1], "J" : [1, 8],
   "K" : [1, 5], "L" : [4, 1], "M" : [2, 3], "N" : [6, 1], "O" : [8, 1],
@@ -41,7 +41,7 @@ let randomKeyP2 = [];
 // ----------------------------------------------------
 
 // generate list of alphabts
-function randomAlphabet(obj){
+export function randomAlphabet(obj){
   const keys = Object.keys(obj)
   return keys[Math.floor(Math.random() * keys.length)];
 };
@@ -121,19 +121,15 @@ function dragDrop(){
   this.classList.remove("selected");
 }
 
+
 // checkScore
 let confirmBtn = document.querySelector("#confirm-btn");
 confirmBtn.addEventListener('click', checkScore);
 confirmBtn.addEventListener('click', changeTurn);
 
+// shuffle and pass turn of the player
+let shauffleBtn = document.querySelector("#shauffle-btn");
+shauffleBtn.addEventListener('click', shuffle);
 
-// confirmBtn.addEventListener('click', () => {
-
-//   let answer = confirm("Are you sure?");
-//       if (answer){
-
-//         console.log("hello");
-//         // get new tile
-//         changeTurn;
-//       }
-// });
+let passButton = document.querySelector("#pass-btn");
+passButton.addEventListener('click', passTurn);
