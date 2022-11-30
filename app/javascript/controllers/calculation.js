@@ -1,54 +1,33 @@
-
 let score = 0;
 let validation = false;
 
 export function checkScore(){
-  // console.log("OK");
+
+  // where the player has put his tiles
   let word = document.querySelectorAll(".game-table-body .current-word");
   let checkWord = '';
 
+  // get the "word" from the tiles
   word.forEach(element => {
     checkWord += element.innerText[0];
     score += Number(element.innerText[3]);
   });
 
-    // check word order and if the word exist/
-    // console.log(checkWord)
-    //console.log(checkValidWord("checkWord"));
-  let isValid = checkValidWord(checkWord)
+  function check(){
+    // check if the word exist
+    checkValidWord(checkWord);
 
-    // setTimeout(startCheck(checkWord), 3000);
-
-
-  if(isValid) {
-    // score for the length of the word
-    score += word.length;
-    if (score <= 5){
-      alert('You got ${score} points. You can do better.');
-    }else{
-      alert('You got ${score} points! Well done!');
-    }
-    updateScoreBored(1, score);
-
-  } else {
-    alert("The word doesn't exist..");
-    score = 0;
+    // remove border from the tile in the table
+    removeBorder(word);
   }
 
-  console.log("score is");
-  console.log(score);
-  removeBorder(word);
-
+  check();
 };
 
   let scoreBoredP1 = document.querySelector(".score-p1");
   let scoreBoredP2 = document.querySelector(".score-p2");
 
 function updateScoreBored(playerNum, score){
-  // check which player
-  // if (playerNum = 1){
-
-  // }
 
   console.log(playerNum);
   console.log(Number(scoreBoredP1.innerText));
@@ -56,7 +35,6 @@ function updateScoreBored(playerNum, score){
   scoreBoredP1.innerText = Number(scoreBoredP1.innerText) + score;
 
 }
-
 
 
 function removeBorder(word){
@@ -67,22 +45,40 @@ function removeBorder(word){
 }
 
 
-// let url = "https://wagon-dictionary.herokuapp.com/";
+// true or false
+async function checkValidWord(searchWord){
 
-function checkValidWord(searchWord){
+  let res = await fetch(`https://wagon-dictionary.herokuapp.com/${searchWord}`);
+  let data = await res.json();
+  validation = await data.found;
 
-  // console.log(searchWord);
-  fetch(`https://wagon-dictionary.herokuapp.com/${searchWord}`)
-    .then(response => response.json())
-    .then(data => {
-      // console.log("data found is ");
-      // console.log(data.found);
-      // validation = data.found;
-      return data.found;
-    });
+  scoreCheck(searchWord);
+
+    // .then(response => response.json())
+    // .then(data => {
+    //   validation =  data.found;
+    //   console.log("validation22 is");
+    //   console.log(data.found);
+    // });
 }
 
 
-function startCheck(){
+function scoreCheck(word){
+  if(validation) {
+    // score for the length of the word
 
+    if (score <= 5){
+      alert(`You got ${score} points. You can do better.`);
+    }else{
+      alert(`You got ${score} points! Well done!`);
+    }
+    updateScoreBored(1, score);
+
+    } else {
+      alert("The word doesn't exist..");
+      score = 0;
+    }
+
+    // reset score
+    score = 0;
 }
